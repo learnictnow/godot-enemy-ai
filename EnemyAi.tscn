@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyhpm7iwgwmuv"]
+
+[ext_resource type="Script" path="res://EnemyAi.gd" id="1_ey0o4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bpkqw"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n71x5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3grqo"]
+albedo_color = Color(1, 0.415686, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ajkl"]
+albedo_color = Color(1, 0.45098, 0.0431373, 1)
+
+[node name="EnemyAi" type="CharacterBody3D"]
+script = ExtResource("1_ey0o4")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_bpkqw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_n71x5")
+surface_material_override/0 = SubResource("StandardMaterial3D_3grqo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.815747, -0.586013)
+mesh = SubResource("CylinderMesh_n71x5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2ajkl")
