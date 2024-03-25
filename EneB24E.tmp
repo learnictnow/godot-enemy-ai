@@ -16,7 +16,6 @@ albedo_color = Color(1, 0.45098, 0.0431373, 1)
 radius = 5.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xurln"]
-radius = 0.75
 
 [node name="EnemyAi" type="CharacterBody3D"]
 script = ExtResource("1_ey0o4")
@@ -48,4 +47,4 @@ shape = SubResource("CylinderShape3D_xurln")
 
 [connection signal="body_entered" from="PursueArea" to="." method="_on_pursue_area_body_entered"]
 [connection signal="body_exited" from="PursueArea" to="." method="_on_pursue_area_body_exited"]
-[connection signal="body_entered" from="DeathArea" to="." method="_on_death_area_body_entered"]
+[connection signal="area_entered" from="DeathArea" to="." method="_on_death_area_area_entered"]

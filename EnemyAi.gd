@@ -1,14 +1,15 @@
 extends CharacterBody3D
 
-@export var movement_speed: float = 4.0
+@export var movement_speed: float = 2.0
 @onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 @export var target: CharacterBody3D
+var targetPosition:Vector3
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
-	
+	targetPosition = target.position
 
 func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
@@ -31,3 +32,24 @@ func _physics_process(delta):
 func _on_velocity_computed(safe_velocity: Vector3):
 	velocity = safe_velocity
 	move_and_slide()
+
+
+func _on_pursue_area_body_entered(body):
+	if body.is_in_group("Player"):
+		target = body
+	
+	pass # Replace with function body.
+
+
+func _on_pursue_area_body_exited(body):
+	if body.is_in_group("Player"):
+		target = self
+	
+	pass # Replace with function body.
+
+
+
+func _on_death_area_body_entered(body):
+	if body.is_in_group("Player"):
+		body.respawn()
+	pass # Replace with function body.

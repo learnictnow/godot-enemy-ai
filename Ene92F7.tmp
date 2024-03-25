@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyhpm7iwgwmuv"]
+[gd_scene load_steps=7 format=3 uid="uid://cyhpm7iwgwmuv"]
 
 [ext_resource type="Script" path="res://EnemyAi.gd" id="1_ey0o4"]
 
@@ -15,11 +15,9 @@ albedo_color = Color(1, 0.45098, 0.0431373, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lmpks"]
 radius = 5.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_xurln"]
-radius = 0.75
-
 [node name="EnemyAi" type="CharacterBody3D"]
 script = ExtResource("1_ey0o4")
+movement_speed = null
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -41,11 +39,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2ajkl")
 [node name="PursueArea" type="CollisionShape3D" parent="PursueArea"]
 shape = SubResource("CylinderShape3D_lmpks")
 
-[node name="DeathArea" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathArea"]
-shape = SubResource("CylinderShape3D_xurln")
-
 [connection signal="body_entered" from="PursueArea" to="." method="_on_pursue_area_body_entered"]
 [connection signal="body_exited" from="PursueArea" to="." method="_on_pursue_area_body_exited"]
-[connection signal="body_entered" from="DeathArea" to="." method="_on_death_area_body_entered"]
