@@ -16,6 +16,11 @@ func set_movement_target(movement_target: Vector3):
 
 func _physics_process(delta):
 	set_movement_target(target.position)
+	if target.position != self.position:
+		var rayPOS = target.position
+		rayPOS.y = self.position.y
+		look_at(rayPOS)
+		
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
