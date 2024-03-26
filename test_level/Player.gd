@@ -8,6 +8,8 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var push_force = 8
+
 func _ready():
 	global_position = spawn_point.global_position
 
@@ -32,6 +34,12 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+	# Move that box
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 func respawn():
 	velocity = Vector3.ZERO
