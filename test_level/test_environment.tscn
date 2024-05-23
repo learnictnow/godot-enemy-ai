@@ -366,7 +366,7 @@ shape = SubResource("BoxShape3D_gtv12")
 [node name="SpawnPoints" type="Node3D" parent="."]
 
 [node name="Spawn1" type="Marker3D" parent="SpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3779, 2, 4)
 
 [node name="Spawn2" type="Marker3D" parent="SpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 8)
@@ -374,9 +374,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 8)
 [node name="Spawn3" type="Marker3D" parent="SpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, -2)
 
-[node name="Player" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_lj6sm")]
+[node name="Player" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_lj6sm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, -4)
-spawn_point = NodePath("../SpawnPoints/Spawn1")
+spawn_points = NodePath("../SpawnPoints")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 29, 0)
@@ -384,9 +384,9 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 [node name="WinPoint" parent="." instance=ExtResource("3_va26s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32083, 1.95294, -10.0086)
 
-[node name="EnemyAi" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_uw4mi")]
+[node name="EnemyAi" parent="." node_paths=PackedStringArray("patrolpoints") instance=ExtResource("4_uw4mi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15914, 4.7175, 3.52779)
-target = NodePath("../Player")
+patrolpoints = NodePath("../EnemyPatrolPoints")
 
 [node name="PhysicsBlock" parent="." instance=ExtResource("5_hma8r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36412, 1.5, -6.78534)
@@ -405,5 +405,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.36412, 4.5, -6.78534)
 
 [node name="PhysicsBlock6" parent="." instance=ExtResource("5_hma8r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36412, 4.5, -6.78534)
+
+[node name="EnemyPatrolPoints" type="Node3D" parent="."]
+
+[node name="Patrol1" type="Marker3D" parent="EnemyPatrolPoints" groups=["Patrol"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.62)
+
+[node name="Patrol2" type="Marker3D" parent="EnemyPatrolPoints" groups=["Patrol"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41388, 0, 6.38171)
+
+[node name="Patrol3" type="Marker3D" parent="EnemyPatrolPoints" groups=["Patrol"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5679, 0, 6.38171)
+
+[node name="Patrol4" type="Marker3D" parent="EnemyPatrolPoints" groups=["PAtrol"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1696, 0, 21.6283)
+
+[node name="Patrol5" type="Marker3D" parent="EnemyPatrolPoints" groups=["Patrol"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.56153, 0.917049, -1.82706)
 
 [connection signal="body_entered" from="RespawnArea/MeshInstance3D/Area3D" to="RespawnArea" method="_on_area_3d_body_entered"]

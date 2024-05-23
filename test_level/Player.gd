@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var spawn_point:Marker3D
+@export var spawn_points:Node3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -11,7 +11,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var push_force = 8
 
 func _ready():
-	global_position = spawn_point.global_position
+	var temp_index = randi_range(0, spawn_points.get_child_count()-1)
+	#global_position = spawn_points.get_children()[temp_index].global_position
+	respawn()
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -43,4 +45,5 @@ func _physics_process(delta):
 
 func respawn():
 	velocity = Vector3.ZERO
-	global_position = spawn_point.global_position
+	var temp_index = randi_range(0, spawn_points.get_child_count()-1)
+	global_position = spawn_points.get_children()[temp_index].global_position
