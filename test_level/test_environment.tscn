@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dowvk531n4y5x"]
+[gd_scene load_steps=34 format=3 uid="uid://dowvk531n4y5x"]
 
 [ext_resource type="Script" path="res://test_level/RespawnArea.gd" id="1_l3d50"]
 [ext_resource type="PackedScene" uid="uid://c4dyfiufsjalg" path="res://test_level/Player.tscn" id="2_lj6sm"]
@@ -82,6 +82,16 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gtv12"]
 size = Vector3(75, 1, 75)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c4lcn"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sh5k"]
+albedo_color = Color(0, 0.231373, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_o5xpi"]
+radius = 1.0
+height = 2.0
 
 [node name="TestEnvironment" type="Node3D"]
 
@@ -387,6 +397,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32083, 1.95294, -10.0086)
 [node name="EnemyAi" parent="." node_paths=PackedStringArray("patrolpoints") instance=ExtResource("4_uw4mi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15914, 4.7175, 3.52779)
 patrolpoints = NodePath("../EnemyPatrolPoints")
+
+[node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81467, 0)
+mass = 5.0
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_c4lcn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
+material_override = SubResource("StandardMaterial3D_0sh5k")
+mesh = SubResource("SphereMesh_o5xpi")
 
 [node name="PhysicsBlock" parent="." instance=ExtResource("5_hma8r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36412, 1.5, -6.78534)
